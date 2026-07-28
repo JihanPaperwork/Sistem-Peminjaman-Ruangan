@@ -2,6 +2,15 @@
 > **Proyek UAS Data Mining**  
 > *Solusi Cerdas Peminjaman Ruangan Kelas Berbasis Multi-Agentic Architecture, RAG, dan Local LLM (Ollama)*
 
+> *👥 Penulis & Pengembang
+> 
+>      **NIM Nama**: 23.11.5492 Jihan Humaira
+>                    23.11.5471 Agustina Septofanny
+> 
+>      **Mata Kuliah**: Data Mining
+> 
+>      **Jurusan**: Informatika*
+
 ---
 
 ## 📌 Gambaran Umum Proyek
