@@ -1,0 +1,11 @@
+streamlit>=1.30.0
+pandas>=2.0.0
+openpyxl>=3.1.0
+requests>=2.31.0
+langgraph>=0.0.20
+langchain-core>=0.1.30
+langchain-community>=0.0.25
+langchain-text-splitters>=0.0.1
+chromadb>=0.4.22
+sentence-transformers>=2.2.2
+pypdf>=4.0.0

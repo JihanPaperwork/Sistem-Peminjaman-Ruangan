@@ -1,0 +1,31 @@
+# Python bytecode / cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Vector Database Local Storage (Dibangun otomatis dari SOP PDF saat pertama kali app berjalan)
+chroma_db_sop/
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# IDE / Editor configuration
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# System / OS files
+.DS_Store
+Thumbs.db
+
+# Streamlit secrets / local config
+.streamlit/secrets.toml
+
+# Temporary logs & output evaluation scratch
+*.log
+*.tmp
