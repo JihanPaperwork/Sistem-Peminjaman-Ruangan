@@ -4,12 +4,10 @@
 
 > *👥 Penulis & Pengembang
 > 
->      **NIM Nama**: 23.11.5492 Jihan Humaira
+>      NIM Nama    : 23.11.5492 Jihan Humaira
 >                    23.11.5471 Agustina Septofanny
-> 
->      **Mata Kuliah**: Data Mining
-> 
->      **Jurusan**: Informatika*
+>      Mata Kuliah : Data Mining
+>      Jurusan     : Informatika
 
 ---
 
