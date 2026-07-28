@@ -23,13 +23,44 @@ from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 
 # ==========================================
-# BAGIAN B: KONFIGURASI OLLAMA LOKAL
+# BAGIAN B: KONFIGURASI LLM (GROQ CLOUD / OLLAMA)
 # ==========================================
+class GroqPipelineWrapper:
+    """Wrapper untuk Groq Cloud API (100% Gratis, 24/7, Super Fast LPU)."""
+    def __init__(self, api_key: str, model_name: str = "llama-3.2-3b-preview"):
+        self.api_key = api_key
+        self.model_name = model_name
+        self.url = "https://api.groq.com/openai/v1/chat/completions"
+
+    def __call__(self, prompt: str, **kwargs):
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "model": self.model_name,
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": 0.1
+        }
+        try:
+            res = requests.post(self.url, json=payload, headers=headers, timeout=30)
+            res.raise_for_status()
+            text_result = res.json()["choices"][0]["message"]["content"]
+            return [{"generated_text": text_result}]
+        except Exception as e:
+            print(f"⚠️ Groq API Call failed: {e}")
+            return [{"generated_text": ""}]
+
+
 class OllamaPipelineWrapper:
-    """Wrapper untuk memanggil Ollama API lokal (localhost:11434)."""
+    """Wrapper untuk memanggil Ollama API (Lokal atau via Ngrok)."""
     def __init__(self, model_name="llama3.2"):
         self.model_name = model_name
-        self.url = "http://localhost:11434/api/generate"
+        base_url = os.getenv("OLLAMA_URL", "http://localhost:11434").strip().rstrip("/")
+        if not base_url.endswith("/api/generate"):
+            self.url = f"{base_url}/api/generate"
+        else:
+            self.url = base_url
 
     def __call__(self, prompt, **kwargs):
         payload = {
@@ -38,24 +69,44 @@ class OllamaPipelineWrapper:
             "stream": False,
             "temperature": 0.1
         }
+        headers = {
+            "Content-Type": "application/json",
+            "ngrok-skip-browser-warning": "true"
+        }
         try:
-            response = requests.post(self.url, json=payload, timeout=120)
+            response = requests.post(self.url, json=payload, headers=headers, timeout=120)
             response.raise_for_status()
             text_result = response.json().get("response", "")
             return [{"generated_text": text_result}]
         except Exception as e:
-            print(f"⚠️ Gagal menghubungi Ollama: {e}")
+            print(f"⚠️ Gagal menghubungi Ollama ({self.url}): {e}")
             return [{"generated_text": ""}]
 
+
 @st.cache_resource
-def load_llm_ollama(model_name: str = "llama3.2"):
+def load_llm_pipeline(model_name: str = "llama3.2"):
+    """
+    Inisialisasi LLM dengan hirarki:
+    1. Groq Cloud API (jika GROQ_API_KEY ada di env / st.secrets) -> 24/7 Gratis
+    2. Ollama API (Lokal / Ngrok) -> Fallback
+    """
+    groq_key = os.getenv("GROQ_API_KEY")
+    if not groq_key and hasattr(st, "secrets") and "GROQ_API_KEY" in st.secrets:
+        groq_key = st.secrets["GROQ_API_KEY"]
+
+    if groq_key:
+        print("✅ LLM Engine: Groq Cloud API (Llama 3.2 24/7 Fast LPU)")
+        return GroqPipelineWrapper(groq_key)
+
     try:
+        print("ℹ️ LLM Engine: Ollama Local/Ngrok")
         pipe = OllamaPipelineWrapper(model_name)
         return pipe
     except Exception:
         return None
 
-llm_pipe = load_llm_ollama()
+load_llm_ollama = load_llm_pipeline
+llm_pipe = load_llm_pipeline()
 
 # ==========================================
 # BAGIAN C: DATA PIPELINE (REVISI TOTAL)
