@@ -129,10 +129,3 @@ python evaluator.py
 | ⚡ **Average Latency** | < 10.0s | **8.17 detik** / case | ⚡ **EFEKTIF** |
 
 ---
-
-## 👥 Penulis & Pengembang
-
-- **NIM Nama**: 23.11.5492 Jihan Humaira
-                23.11.5471 Agustina Septofanny
-- **Mata Kuliah**: Data Mining 
-- **Jurusan**: Informatika
