@@ -21,14 +21,14 @@ Sistem mengintegrasikan verifikasi kelayakan akademik mahasiswa dari data BAAK, 
 
 ## ✨ Fitur Utama
 
-- 🤖 **Multi-Agentic Decision Workflow (LangGraph)**: Membagi tugas ke agen-agen terpesialisasi (Verifikasi Akademik, Operasional Sarpras, RAG SOP).
-- 💬 **Multi-Turn Conversational Context (`1 Session = 1 Context`)**: Akumulasi entitas secara persisten (`st.session_state["session_context"]`), mendukung pertanyaan *follow-up* (misal: *"kalau jam 15.30 gimana?"*, *"kalau tanggal 2 agustus gimana?"*) tanpa lupa NIM/Ruangan.
-- 📆 **Smart Indonesian & Relative Date Parser**: Mengenali secara otomatis kata relatif ("besok", "lusa") dan ekspresi tanggal Indonesia ("2 agustus", "15 agustus 2026") dikonversi ke format ISO `YYYY-MM-DD`.
-- 📚 **RAG (Retrieval-Augmented Generation)**: Membaca dokumen SOP resmi (`asset/sop_peminjaman.pdf`) menggunakan ChromaDB & HuggingFace Embeddings (`all-MiniLM-L6-v2`).
-- 🎨 **Visual Dashboard Jadwal Kuliah**: Menampilkan jadwal perkuliahan reguler dalam bentuk *Visual Cards* interaktif lengkap dengan paginasi dan filter hari/ruangan.
-- 🚫 **Zero Hallucination & Strict Prompting**: Balasan AI disusun secara santai, ramah, dan bebas dari halusinasi link URL / template email kaku.
-- 🔄 **Tombol Reset Chat**: Fitur pembersihan sesi sekali klik untuk memulai peminjaman baru.
-- 📊 **Automated Quantitative Evaluator**: Script `evaluator.py` otomatis menguji 15 *Test Cases* dengan metrik presisi akurasi, efektivitas, halusinasi, dan latency.
+-  **Multi-Agentic Decision Workflow (LangGraph)**: Membagi tugas ke agen-agen terpesialisasi (Verifikasi Akademik, Operasional Sarpras, RAG SOP).
+-  **Multi-Turn Conversational Context (`1 Session = 1 Context`)**: Akumulasi entitas secara persisten (`st.session_state["session_context"]`), mendukung pertanyaan *follow-up* (misal: *"kalau jam 15.30 gimana?"*, *"kalau tanggal 2 agustus gimana?"*) tanpa lupa NIM/Ruangan.
+-  **Smart Indonesian & Relative Date Parser**: Mengenali secara otomatis kata relatif ("besok", "lusa") dan ekspresi tanggal Indonesia ("2 agustus", "15 agustus 2026") dikonversi ke format ISO `YYYY-MM-DD`.
+-  **RAG (Retrieval-Augmented Generation)**: Membaca dokumen SOP resmi (`asset/sop_peminjaman.pdf`) menggunakan ChromaDB & HuggingFace Embeddings (`all-MiniLM-L6-v2`).
+-  **Visual Dashboard Jadwal Kuliah**: Menampilkan jadwal perkuliahan reguler dalam bentuk *Visual Cards* interaktif lengkap dengan paginasi dan filter hari/ruangan.
+-  **Zero Hallucination & Strict Prompting**: Balasan AI disusun secara santai, ramah, dan bebas dari halusinasi link URL / template email kaku.
+-  **Tombol Reset Chat**: Fitur pembersihan sesi sekali klik untuk memulai peminjaman baru.
+-  **Automated Quantitative Evaluator**: Script `evaluator.py` otomatis menguji 15 *Test Cases* dengan metrik presisi akurasi, efektivitas, halusinasi, dan latency.
 
 ---
 
@@ -120,10 +120,10 @@ python evaluator.py
 ### Rekapitulasi Metrik Kinerja Sistem:
 | Metrik Evaluasi Kuantitatif | Benchmark Target | Hasil Evaluasi | Status |
 |---|---|---|---|
-| 🎯 **Decision Accuracy** | ≥ 90.0% | **100.00%** (15/15 Pass) | ✅ **PERFECT** |
-| 🔍 **Entity Extraction Accuracy** | ≥ 90.0% | **98.33%** (59/60 Entitas) | ✅ **EXCELLENT** |
-| 🚫 **Hallucination Rate** | ≤ 5.0% | **0.00%** | ✅ **ZERO HALU** |
-| 📝 **Explainability Index** | 100.0% | **100.00%** | ✅ **TRANSPARENT** |
-| ⚡ **Average Latency** | < 10.0s | **8.17 detik** / case | ⚡ **EFEKTIF** |
+|  **Decision Accuracy** | ≥ 90.0% | **100.00%** (15/15 Pass) | ✅ **PERFECT** |
+|  **Entity Extraction Accuracy** | ≥ 90.0% | **98.33%** (59/60 Entitas) | ✅ **EXCELLENT** |
+|  **Hallucination Rate** | ≤ 5.0% | **0.00%** | ✅ **ZERO HALU** |
+|  **Explainability Index** | 100.0% | **100.00%** | ✅ **TRANSPARENT** |
+|  **Average Latency** | < 10.0s | **8.17 detik** / case | ⚡ **EFEKTIF** |
 
 ---
